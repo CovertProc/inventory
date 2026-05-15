@@ -125,7 +125,6 @@
   <div class="filter-btns">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="ok">In Stock</button>
-    <button class="filter-btn" data-filter="low">Low</button>
     <button class="filter-btn" data-filter="out">Out</button>
   </div>
 </div>
@@ -153,52 +152,79 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// EDIT YOUR INVENTORY HERE
 // ═══════════════════════════════════════════════════════════════════
-// Each item: { code, name, qty, reorder, cost, price }
-// Change LAST_UPDATED whenever you update the list.
+// DATA SOURCE
+// ═══════════════════════════════════════════════════════════════════
+// This page reads stock data from "stocks.csv" in the same folder.
+// To update stocks: replace stocks.csv with your latest Xero export.
 
-const LAST_UPDATED = "15 May 2026";
+const CSV_FILE = "stocks.csv";
 
-const INVENTORY = [
-  { code: "PLY-F17-2400x1200"           , name: "Plywood F17 - 2400 x 1200"                          , qty:  142, reorder:  30, cost:   0.00, price:   0.00 },
-  { code: "PLY-F17-1800x1200"           , name: "Plywood F17 - 1800 x 1200"                          , qty: 1730, reorder: 345, cost:   0.00, price:   0.00 },
-  { code: "PLY-F14-1800x1200"           , name: "Plywood F14 - 1800 x 1200"                          , qty:    0, reorder:   5, cost:   0.00, price:   0.00 },
-  { code: "LVL-95x63x6-88pcs"           , name: "Formwork LVL - 95 x 63 x 6m x 88 pcs"               , qty:    0, reorder:   5, cost:   0.00, price:   0.00 },
-  { code: "LVL-95x63x3.6-77pcs"         , name: "Formwork LVL - 95 x 63 x 3.6m x 77pcs"              , qty:    0, reorder:   5, cost:   0.00, price:   0.00 },
-  { code: "LVL-95x63x3.6-66pcs"         , name: "Formwork LVL - 95 x 63 x 3.6m x 66pcs"              , qty:    0, reorder:   5, cost:   0.00, price:   0.00 },
-  { code: "LVL-95x63x2.4-66pcs"         , name: "Formwork LVL - 95 x 63 x 2.4m x 66pcs"              , qty:    0, reorder:   5, cost:   0.00, price:   0.00 },
-  { code: "LVL-95x45x6"                 , name: "Formwork LVL - 95 x 45 x 6m"                        , qty: 9570, reorder: 1915, cost:   0.00, price:   0.00 },
-  { code: "LVL-150x36x6"                , name: "Formwork LVL Edge Board - 150 x 36 x 6m"            , qty: 1764, reorder: 355, cost:   0.00, price:   0.00 },
-  { code: "FIX-T17HHScrew-YZP14Gx75mm"  , name: "T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket" , qty:   90, reorder:  20, cost:   0.00, price:   0.00 },
-  { code: "FIX-T17HHScrew-YZP14Gx50mm"  , name: "T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket" , qty:  878, reorder: 175, cost:   0.00, price:   0.00 },
-  { code: "FIX-T17HHScrew-YZP14Gx150mm" , name: "T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket"  , qty:   75, reorder:  15, cost:   0.00, price:   0.00 },
-  { code: "FIX-T17HHScrew-YZP14Gx100mm" , name: "T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket"  , qty:  205, reorder:  40, cost:   0.00, price:   0.00 },
-  { code: "FIX-SlabChair"               , name: "Concrete Slab Chair"                                , qty: 3000, reorder: 600, cost:   0.00, price:   0.00 },
-  { code: "FIX-BHNails-75x3.75mm"       , name: "Bullet Head Nails 75mm x 3.75mm"                    , qty:  871, reorder: 175, cost:   0.00, price:   0.00 },
-  { code: "FIX-BHNails-50x2.8mm"        , name: "Bullet Head Nails 50mm x 2.8mm"                     , qty:  745, reorder: 150, cost:   0.00, price:   0.00 },
-];
+// State
+let INVENTORY = [];
+let LAST_UPDATED = "—";
+let state = { filter: "all", search: "", sort: "code", asc: true };
 
 // ═══════════════════════════════════════════════════════════════════
-// App logic — no need to edit below
+// CSV parser — handles quoted fields and commas inside quotes
 // ═══════════════════════════════════════════════════════════════════
-
-const fmt = (n) => "$" + n.toLocaleString("en-AU", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const fmtCompact = (n) => n >= 10000 ? "$" + (n/1000).toFixed(1) + "k" : (n > 0 ? fmt(n) : "$0");
-
-function status(item) {
-  if (item.qty <= 0) return "out";
-  if (item.qty <= item.reorder) return "low";
-  return "ok";
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = "", inQuotes = false, i = 0;
+  while (i < text.length) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"' && text[i+1] === '"') { field += '"'; i += 2; continue; }
+      if (c === '"') { inQuotes = false; i++; continue; }
+      field += c; i++; continue;
+    }
+    if (c === '"') { inQuotes = true; i++; continue; }
+    if (c === ',') { row.push(field); field = ""; i++; continue; }
+    if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i+1] === '\n') i++;
+      row.push(field); rows.push(row); row = []; field = ""; i++; continue;
+    }
+    field += c; i++;
+  }
+  if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
+  return rows.filter(r => r.length > 1 || (r.length === 1 && r[0].trim() !== ""));
 }
 
-let state = { filter: "all", search: "", sort: "code", asc: true };
+function rowsToInventory(rows) {
+  if (rows.length < 2) return [];
+  // Find column indexes (Xero export header has *ItemCode, ItemName, Quantity, etc.)
+  const header = rows[0].map(h => h.replace(/^\*/, "").trim());
+  const codeIdx = header.findIndex(h => h.toLowerCase() === "itemcode");
+  const nameIdx = header.findIndex(h => h.toLowerCase() === "itemname");
+  const qtyIdx  = header.findIndex(h => h.toLowerCase() === "quantity");
+  const statusIdx = header.findIndex(h => h.toLowerCase() === "status");
+  if (codeIdx === -1 || nameIdx === -1 || qtyIdx === -1) {
+    throw new Error("CSV is missing required columns: ItemCode, ItemName, Quantity");
+  }
+  return rows.slice(1).map(r => {
+    const qty = parseFloat((r[qtyIdx] || "0").replace(/,/g, "")) || 0;
+    return {
+      code: (r[codeIdx] || "").trim(),
+      name: (r[nameIdx] || "").trim(),
+      qty: Math.round(qty),
+      active: statusIdx === -1 ? true : (r[statusIdx] || "").trim().toLowerCase() === "active",
+    };
+  }).filter(item => item.code && item.active);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// App logic
+// ═══════════════════════════════════════════════════════════════════
+
+function status(item) {
+  return item.qty <= 0 ? "out" : "ok";
+}
 
 function render() {
   const tbody = document.getElementById("tbody");
   const q = state.search.toLowerCase().trim();
 
-  let items = INVENTORY.map(i => ({ ...i, value: i.qty * i.cost, status: status(i) }));
+  let items = INVENTORY.map(i => ({ ...i, status: status(i) }));
 
   if (state.filter !== "all") items = items.filter(i => i.status === state.filter);
   if (q) items = items.filter(i => (i.code + " " + i.name).toLowerCase().includes(q));
@@ -217,14 +243,13 @@ function render() {
         <td class="code">${escapeHtml(i.code)}</td>
         <td class="name">${escapeHtml(i.name)}</td>
         <td class="num">${i.qty.toLocaleString()}</td>
-        <td><span class="badge ${i.status}">${i.status === "ok" ? "In stock" : i.status === "low" ? "Low" : "Out"}</span></td>
+        <td><span class="badge ${i.status}">${i.status === "ok" ? "In stock" : "Out"}</span></td>
       </tr>
     `).join("");
   }
 
-  const all = INVENTORY.map(i => ({ ...i, value: i.qty * i.cost, status: status(i) }));
   document.getElementById("lastUpdated").textContent = LAST_UPDATED;
-  document.getElementById("itemCount").textContent = `Showing ${items.length} of ${INVENTORY.length} items.`;
+  document.getElementById("itemCount").textContent = INVENTORY.length > 0 ? `Showing ${items.length} of ${INVENTORY.length} items.` : "";
 
   document.querySelectorAll("th").forEach(th => {
     th.classList.remove("sorted", "asc");
@@ -239,6 +264,38 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 
+function showError(msg) {
+  document.getElementById("tbody").innerHTML = `<tr><td colspan="4"><div class="empty"><h2>Could not load stock data</h2><div>${escapeHtml(msg)}</div></div></td></tr>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Load the CSV on page open
+// ═══════════════════════════════════════════════════════════════════
+async function loadData() {
+  try {
+    // Add cache-buster so refreshes always get the latest CSV
+    const res = await fetch(CSV_FILE + "?t=" + Date.now());
+    if (!res.ok) throw new Error(`stocks.csv not found (HTTP ${res.status}). Upload the file to your repo.`);
+
+    // Read last-modified header for "Last updated"
+    const lastMod = res.headers.get("last-modified");
+    if (lastMod) {
+      const d = new Date(lastMod);
+      LAST_UPDATED = d.toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) +
+                     " · " + d.toLocaleTimeString("en-AU", { hour: "2-digit", minute: "2-digit" });
+    }
+
+    const text = await res.text();
+    const rows = parseCSV(text);
+    INVENTORY = rowsToInventory(rows);
+    render();
+  } catch (err) {
+    console.error(err);
+    showError(err.message);
+  }
+}
+
+// Wire up controls
 document.getElementById("search").addEventListener("input", e => { state.search = e.target.value; render(); });
 document.querySelectorAll(".filter-btn").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll(".filter-btn").forEach(x => x.classList.remove("active"));
@@ -253,7 +310,7 @@ document.querySelectorAll("th[data-sort]").forEach(th => th.addEventListener("cl
   render();
 }));
 
-render();
+loadData();
 </script>
 </body>
 </html>
