@@ -1,17 +1,17 @@
 *ItemCode,ItemName,Quantity,PurchasesDescription,PurchasesUnitPrice,PurchasesAccount,PurchasesTaxRate,SalesDescription,SalesUnitPrice,SalesAccount,SalesTaxRate,InventoryAssetAccount,CostOfGoodsSoldAccount,Status,InventoryType
-PLY-F17-2400x1200,Plywood F17 - 2400 x 1200,,Plywood F17 - 2400 x 1200,0,,GST Free Expenses,Plywood F17 - 2400 x 1200,0,,,630,500,Active,Tracked
-PLY-F17-1800x1200,Plywood F17 - 1800 x 1200,,Plywood F17 - 1800 x 1200,0,,GST Free Expenses,Plywood F17 - 1800 x 1200,0,,,630,500,Active,Tracked
-PLY-F14-1800x1200,Plywood F14 - 1800 x 1200,,Plywood F14 - 1800 x 1200,0,,GST Free Expenses,Plywood F14 - 1800 x 1200,0,,,630,500,Active,Tracked
-LVL-95x63x6-88pcs,Formwork LVL - 95 x 63 x 6m x 88 pcs,,Formwork LVL - 95 x 63 x 6m x 88 pcs,0,,GST Free Expenses,Formwork LVL - 95 x 63 x 6m x 88 pcs,0,,,630,500,Active,Tracked
-LVL-95x63x3.6-77pcs,Formwork LVL - 95 x 63 x 3.6m x 77pcs,,Formwork LVL - 95 x 63 x 3.6m x 77pcs,0,,GST Free Expenses,Formwork LVL - 95 x 63 x 3.6m x 77pcs,0,,,630,500,Active,Tracked
-LVL-95x63x3.6-66pcs,Formwork LVL - 95 x 63 x 3.6m x 66pcs,,Formwork LVL - 95 x 63 x 3.6m x 66pcs,0,,GST Free Expenses,Formwork LVL - 95 x 63 x 3.6m x 66pcs,0,,,630,500,Active,Tracked
-LVL-95x63x2.4-66pcs,Formwork LVL - 95 x 63 x 2.4m x 66pcs,,Formwork LVL - 95 x 63 x 2.4m x 66pcs,0,,GST Free Expenses,Formwork LVL - 95 x 63 x 2.4m x 66pcs,0,,,630,500,Active,Tracked
-LVL-95x45x6,Formwork LVL - 95 x 45 x 6m,,Formwork LVL - 95 x 45 x 6m - AS5457 LVL- E10 Painted with Blue Waterproof Painting,0,,GST Free Expenses,Formwork LVL - 95 x 45 x 6m - AS5457 LVL- E10 Painted with Blue Waterproof Painting,0,,,630,500,Active,Tracked
-LVL-150x36x6,Formwork LVL Edge Board - 150 x 36 x 6m,"1,764.00",Formwork LVL Edge Board - 150 x 36 x 6m,0,,GST Free Expenses,Formwork LVL Edge Board - 150 x 36 x 6m,0,,,630,500,Active,Tracked
-FIX-T17HHScrew-YZP14Gx75mm,"T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket",,"T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket",0,,GST Free Expenses,"T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket",0,,,630,500,Active,Tracked
-FIX-T17HHScrew-YZP14Gx50mm,"T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket",,"T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket",0,,GST Free Expenses,"T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket",0,,,630,500,Active,Tracked
-FIX-T17HHScrew-YZP14Gx150mm,T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket,,T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket,0,,GST Free Expenses,T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket,0,,,630,500,Active,Tracked
-FIX-T17HHScrew-YZP14Gx100mm,T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket,,T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket,0,,GST Free Expenses,T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket,0,,,630,500,Active,Tracked
-FIX-SlabChair,Concrete Slab Chair,,Concrete Slab Chair,0,,GST Free Expenses,Concrete Slab Chair,0,,,630,500,Active,Tracked
-FIX-BHNails-75x3.75mm,Bullet Head Nails 75mm x 3.75mm,871,Bullet Head Nails 75mm x 3.75mm,0,,GST Free Expenses,Bullet Head Nails 75mm x 3.75mm,0,,,630,500,Active,Tracked
-FIX-BHNails-50x2.8mm,Bullet Head Nails 50mm x 2.8mm,745,Bullet Head Nails 50mm x 2.8mm,0,,GST Free Expenses,Bullet Head Nails 50mm x 2.8mm,0,,,630,500,Active,Tracked
+PLY-F17-2400x1200,Plywood F17 - 2400 x 1200,62.00,Plywood F17 - 2400 x 1200,0.00,,GST Free Expenses,Plywood F17 - 2400 x 1200,0.00,,,630,500,Active,Tracked
+PLY-F17-1800x1200,Plywood F17 - 1800 x 1200,"1,490.00",Plywood F17 - 1800 x 1200,0.00,,GST Free Expenses,Plywood F17 - 1800 x 1200,0.00,,,630,500,Active,Tracked
+PLY-F14-1800x1200,Plywood F14 - 1800 x 1200,0.00,Plywood F14 - 1800 x 1200,0.00,,GST Free Expenses,Plywood F14 - 1800 x 1200,0.00,,,630,500,Active,Tracked
+LVL-95x63x6-88pcs,Formwork LVL - 95 x 63 x 6m x 88 pcs,0.00,Formwork LVL - 95 x 63 x 6m x 88 pcs,0.00,,GST Free Expenses,Formwork LVL - 95 x 63 x 6m x 88 pcs,0.00,,,630,500,Active,Tracked
+LVL-95x63x3.6-77pcs,Formwork LVL - 95 x 63 x 3.6m x 77pcs,0.00,Formwork LVL - 95 x 63 x 3.6m x 77pcs,0.00,,GST Free Expenses,Formwork LVL - 95 x 63 x 3.6m x 77pcs,0.00,,,630,500,Active,Tracked
+LVL-95x63x3.6-66pcs,Formwork LVL - 95 x 63 x 3.6m x 66pcs,0.00,Formwork LVL - 95 x 63 x 3.6m x 66pcs,0.00,,GST Free Expenses,Formwork LVL - 95 x 63 x 3.6m x 66pcs,0.00,,,630,500,Active,Tracked
+LVL-95x63x2.4-66pcs,Formwork LVL - 95 x 63 x 2.4m x 66pcs,0.00,Formwork LVL - 95 x 63 x 2.4m x 66pcs,0.00,,GST Free Expenses,Formwork LVL - 95 x 63 x 2.4m x 66pcs,0.00,,,630,500,Active,Tracked
+LVL-95x45x6,Formwork LVL - 95 x 45 x 6m,"9,570.00",Formwork LVL - 95 x 45 x 6m - AS5457 LVL- E10 Painted with Blue Waterproof Painting,0.00,,GST Free Expenses,Formwork LVL - 95 x 45 x 6m - AS5457 LVL- E10 Painted with Blue Waterproof Painting,0.00,,,630,500,Active,Tracked
+LVL-150x36x6,Formwork LVL Edge Board - 150 x 36 x 6m,"1,764.00",Formwork LVL Edge Board - 150 x 36 x 6m,0.00,,GST Free Expenses,Formwork LVL Edge Board - 150 x 36 x 6m,0.00,,,630,500,Active,Tracked
+FIX-T17HHScrew-YZP14Gx75mm,"T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket",90.00,"T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket",0.00,,GST Free Expenses,"T17 Hex Head Screw YZP 14G x 75mm 1,000 pcs/bucket",0.00,,,630,500,Active,Tracked
+FIX-T17HHScrew-YZP14Gx50mm,"T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket",878.00,"T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket",0.00,,GST Free Expenses,"T17 Hex Head Screw YZP 14G x 50mm 1,000 pcs/bucket",0.00,,,630,500,Active,Tracked
+FIX-T17HHScrew-YZP14Gx150mm,T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket,75.00,T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket,0.00,,GST Free Expenses,T17 Hex Head Screw YZP 14G x 150mm 500 pcs/bucket,0.00,,,630,500,Active,Tracked
+FIX-T17HHScrew-YZP14Gx100mm,T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket,205.00,T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket,0.00,,GST Free Expenses,T17 Hex Head Screw YZP 14G x 100mm 750 pcs/bucket,0.00,,,630,500,Active,Tracked
+FIX-SlabChair,Concrete Slab Chair,"3,000.00",Concrete Slab Chair,0.00,,GST Free Expenses,Concrete Slab Chair,0.00,,,630,500,Active,Tracked
+FIX-BHNails-75x3.75mm,Bullet Head Nails 75mm x 3.75mm,871.00,Bullet Head Nails 75mm x 3.75mm,0.00,,GST Free Expenses,Bullet Head Nails 75mm x 3.75mm,0.00,,,630,500,Active,Tracked
+FIX-BHNails-50x2.8mm,Bullet Head Nails 50mm x 2.8mm,745.00,Bullet Head Nails 50mm x 2.8mm,0.00,,GST Free Expenses,Bullet Head Nails 50mm x 2.8mm,0.00,,,630,500,Active,Tracked
